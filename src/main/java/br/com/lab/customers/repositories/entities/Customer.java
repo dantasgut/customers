@@ -8,13 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name="tb_customers")
 public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator = "sq_customers")	
+	@TableGenerator(name = "sq_customers", table = "tb_sequences", pkColumnName = "name", valueColumnName = "value", pkColumnValue="sq_customers")
 	@Column(name="id")
 	private Integer id;
 	
